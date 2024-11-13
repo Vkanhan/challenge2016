@@ -6,6 +6,11 @@ import (
 	"strings"
 )
 
+const (
+    Include = "I"
+    Exclude = "E"
+)
+
 func (ds *DistributionSystem) addNewDistributor(reader *bufio.Reader) {
 	fmt.Print("\nEnter distributor name: ")
 	name, _ := reader.ReadString('\n')
@@ -46,7 +51,7 @@ func (ds *DistributionSystem) addPermissions(reader *bufio.Reader) {
 		return
 	}
 
-	fmt.Print("Enter region code (CITY-STATE-COUNTRY): ")
+	fmt.Print("Enter region code:  (CITY-STATE-COUNTRY): ")
 	region, _ := reader.ReadString('\n')
 	region = strings.ToUpper(strings.TrimSpace(region))
 
@@ -73,12 +78,12 @@ func (ds *DistributionSystem) addPermissions(reader *bufio.Reader) {
 		}
 	}
 
-	dist.Permissions[region] = permission == "I"
+	dist.Permissions[region] = permission == Include
 	ds.Distributors[name] = dist
 	fmt.Printf("Successfully updated permissions for %s: %s is now %s\n",
 		name,
 		region,
-		map[bool]string{true: "INCLUDED", false: "EXCLUDED"}[permission == "I"])
+		map[bool]string{true: Include, false: Exclude}[permission == Include])
 }
 
 func (ds *DistributionSystem) checkRights(reader *bufio.Reader) {
@@ -144,7 +149,7 @@ func (ds *DistributionSystem) listDistributors() {
 						region,
 						reg.CityName,
 						reg.StateName,
-						map[bool]string{true: "INCLUDED", false: "EXCLUDED"}[included])
+						map[bool]string{true: Include, false: Exclude}[included])
 				}
 			}
 		}

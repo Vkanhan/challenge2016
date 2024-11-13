@@ -50,7 +50,6 @@ func main() {
 			fmt.Println("Invalid choice. Please try again.")
 		}
 
-		// Add a small delay and clear screen for better readability
 		fmt.Println("\nPress Enter to continue...")
 		reader.ReadString('\n')
 		fmt.Print("\033[H\033[2J") // Clear screen

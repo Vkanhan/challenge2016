@@ -10,14 +10,14 @@ import (
 func (ds *DistributionSystem) loadRegionsFromCSV(filename string) error {
 	file, err := os.Open(filename)
 	if err != nil {
-		return fmt.Errorf("error opening file: %v", err)
+		return fmt.Errorf("failed to open the csv file: '%s'%w", filename, err)
 	}
 	defer file.Close()
 
 	reader := csv.NewReader(file)
 	// Skip first line
 	if _, err := reader.Read(); err != nil {
-		return fmt.Errorf("error reading header: %v", err)
+		return fmt.Errorf("failed to read: %w", err)
 	}
 
 	for {
