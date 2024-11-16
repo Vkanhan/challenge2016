@@ -64,7 +64,7 @@ func (ds *DistributionSystem) addPermissions(reader *bufio.Reader) {
 	permission, _ := reader.ReadString('\n')
 	permission = strings.ToUpper(strings.TrimSpace(permission))
 
-	if permission != "I" && permission != "E" {
+	if permission != Include && permission != Exclude {
 		fmt.Println("Error: Invalid permission type! Use 'I' for Include or 'E' for Exclude.")
 		return
 	}
